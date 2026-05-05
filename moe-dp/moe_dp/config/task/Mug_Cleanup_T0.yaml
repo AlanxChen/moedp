@@ -1,0 +1,13 @@
+defaults:
+  - mimicgen_image
+  - _self_
+
+name: Mug_Cleanup_T0
+
+# Paper: Mug_Cleanup_T0
+moe:
+  num_experts: 16
+  top_k: 4
+  aux_loss_weight: 0.1
+  lambda_balance: 1.0
+  lambda_entropy: 0.1

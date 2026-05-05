@@ -1,0 +1,105 @@
+name: mimicgen_image
+
+n_demo : 200
+
+shape_meta: &shape_meta
+  # acceptable types: rgb, low_dim
+  obs:
+    agentview_image:
+      shape: [3, 84, 84]
+      type: rgb
+    robot0_eye_in_hand_image:
+      shape: [3, 84, 84]
+      type: rgb
+    robot0_eef_pos:
+      shape: [3]
+      type: low_dim
+    robot0_eef_quat:
+      shape: [4]
+      type: low_dim
+    robot0_gripper_qpos:
+      shape: [2]
+      type: low_dim
+    # task_step:
+    #   shape: [1]
+
+  action: 
+    shape: [7]
+
+env_runner_shape_meta: &env_runner_shape_meta
+  # acceptable types: rgb, low_dim
+  obs:
+    agentview_image:
+      shape: [3, 84, 84]
+      type: rgb
+    robot0_eye_in_hand_image:
+      shape: [3, 84, 84]
+      type: rgb
+    robot0_eef_pos:
+      shape: [3]
+      type : low_dim
+    robot0_eef_quat:
+      shape: [4]
+      type : low_dim
+    robot0_gripper_qpos:
+      shape: [2]
+      type : low_dim
+    task_step:
+      shape: [1]
+    # render_image:
+    #   shape: [480, 480, 3]
+  action: 
+    shape: [7]
+
+
+abs_action: &abs_action False
+
+moe:
+  use_MoE: True
+  n_emb: 256
+  gate_dim: 256
+  p_drop_attn: 0.1
+  num_experts: 16
+  top_k: 2
+  boost: False
+  use_aux_loss: True
+  aux_loss_weight: 0.1
+  lambda_balance: 1.0
+  lambda_entropy: 0.1
+
+env_runner:
+  _target_: moe_dp.env_runner.mimicgen_runner_eval_reset_obj_async.MimicgenRunner
+  dataset_path: ${dataset_path}
+  shape_meta: *env_runner_shape_meta
+  n_train: 0
+  n_train_vis: 0
+  train_start_idx: 0
+  n_test: 50
+  n_test_vis: 20 
+  test_start_seed: 100000
+  max_steps: ${get_max_steps:${task_name}}
+  n_obs_steps: ${n_obs_steps}
+  n_action_steps: ${n_action_steps}
+  render_obs_key: 'agentview_image'
+  fps: 10
+  crf: 22
+  past_action: ${past_action_visible}
+  abs_action: *abs_action
+  tqdm_interval_sec: 1.0
+  n_envs: 25
+
+dataset:
+  _target_: moe_dp.dataset.mimicgen_dataset_image.MimicgenDataset
+  n_demo: ${n_demo}
+  shape_meta: *shape_meta
+  dataset_path: ${dataset_path}
+  horizon: ${horizon}
+  pad_before: ${eval:'${n_obs_steps}-1+${n_latency_steps}'}
+  pad_after: ${eval:'${n_action_steps}-1'}
+  n_obs_steps: ${dataset_obs_steps}
+  abs_action: *abs_action
+  rotation_rep: 'rotation_6d'
+  use_legacy_normalizer: False
+  use_cache: True
+  seed: 42
+  val_ratio: 0.02

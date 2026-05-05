@@ -1,0 +1,13 @@
+defaults:
+  - mimicgen_image
+  - _self_
+
+name: Kitchen_T0
+
+# Paper: Kitchen_T0
+moe:
+  num_experts: 16
+  top_k: 2
+  aux_loss_weight: 0.1
+  lambda_balance: 1.0
+  lambda_entropy: 0.07
