@@ -1,0 +1,29 @@
+setuptools==59.5.0
+Cython==0.29.35
+patchelf==0.17.2.0
+mujoco==2.3.2
+natsort
+open3d
+huggingface-hub==0.25.2
+threadpoolctl
+imagecodecs
+zarr==2.12.0
+wandb
+ipdb
+gpustat
+dm_control
+omegaconf
+hydra-core==1.2.0
+dill==0.3.5.1
+einops==0.4.1
+diffusers==0.11.1
+numba==0.56.4
+moviepy
+imageio
+av
+matplotlib
+termcolor
+h5py
+robosuite @ https://github.com/AlanxChen/robosuite/archive/7922b6d4a5f5ba7d3e7ad357fae355445bd66470.tar.gz
+robomimic @ https://github.com/AlanxChen/robomimic/archive/1c7cd5711c69d39f017be1e0ff36524d42ee5b4f.tar.gz
+mimicgen @ https://github.com/AlanxChen/mimicgen/archive/d4d6bf6654d8774430634c35f588a3c7f2ca9436.tar.gz
