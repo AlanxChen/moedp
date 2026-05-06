@@ -37,7 +37,6 @@ Then, install MoE-DP and the required local packages.
 ```bash
 cd moe-dp && pip install -e . && cd ..
 cd third_party/gym-0.21.0 && pip install -e . && cd ../..
-pip install --no-deps "robosuite_task_zoo @ https://github.com/AlanxChen/robosuite-task-zoo/archive/522d4a012185278e51a65068ad19a0fb0bc9cf8d.tar.gz"
 ```
 
 Finally, configure MuJoCo rendering for headless GPU evaluation. Add the

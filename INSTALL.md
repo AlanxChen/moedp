@@ -38,14 +38,6 @@ cd moe-dp && pip install -e . && cd ..
 cd third_party/gym-0.21.0 && pip install -e . && cd ../..
 ```
 
-Install `robosuite-task-zoo` separately with `--no-deps` to avoid pulling
-`mujoco-py`; this project uses `mujoco==2.3.2` instead.
-
-```bash
-pip install --no-deps "robosuite_task_zoo @ https://github.com/AlanxChen/robosuite-task-zoo/archive/522d4a012185278e51a65068ad19a0fb0bc9cf8d.tar.gz"
-```
-
-
 
 ## 6. Configure MuJoCo Rendering
 
