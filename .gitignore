@@ -54,7 +54,6 @@ extracted_frames
 
 visual_data
 wandb
-checkpoint_*
 
 Exp_Results
 video_data
