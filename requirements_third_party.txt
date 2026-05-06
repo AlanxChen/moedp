@@ -1,0 +1,4 @@
+-e git+https://github.com/AlanxChen/robosuite.git@7922b6d4a5f5ba7d3e7ad357fae355445bd66470#egg=robosuite
+-e git+https://github.com/AlanxChen/robomimic.git@1c7cd5711c69d39f017be1e0ff36524d42ee5b4f#egg=robomimic
+-e git+https://github.com/AlanxChen/mimicgen.git@d4d6bf6654d8774430634c35f588a3c7f2ca9436#egg=mimicgen
+-e git+https://github.com/AlanxChen/robosuite-task-zoo.git@50d21a3c2543d25a96771571d5ad15380b3b7432#egg=robosuite_task_zoo

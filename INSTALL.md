@@ -23,6 +23,7 @@ pip install torch torchvision torchaudio --index-url https://download.pytorch.or
 ```bash
 pip install cmake==3.22
 pip install -r requirements.txt
+pip install --src third_party -r requirements_third_party.txt
 ```
 
 ## 4. Install PyTorch3D

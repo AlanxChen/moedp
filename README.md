@@ -29,6 +29,7 @@ Next, install the Python dependencies and PyTorch3D.
 ```bash
 pip install cmake==3.22
 pip install -r requirements.txt
+pip install --src third_party -r requirements_third_party.txt
 pip install "git+https://github.com/facebookresearch/pytorch3d.git@stable"
 ```
 
@@ -118,7 +119,7 @@ use `scripts/train_taskmd_multi_gpu.sh`.
 ```bash
 bash scripts/train_taskmd_multi_gpu.sh \
   --gpus 0,1,2,3 \
-  --seeds 0,1 \
+  --seeds 0 \
   --n-demo 100 \
   --run-tag moe_multi
 ```
