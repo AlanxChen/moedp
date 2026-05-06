@@ -21,6 +21,7 @@ pip install torch torchvision torchaudio --index-url https://download.pytorch.or
 ## 3. Install Python Dependencies
 
 ```bash
+pip install cmake==3.22
 pip install -r requirements.txt
 ```
 

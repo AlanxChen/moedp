@@ -27,6 +27,7 @@ pip install torch torchvision torchaudio --index-url https://download.pytorch.or
 Next, install the Python dependencies and PyTorch3D.
 
 ```bash
+pip install cmake==3.22
 pip install -r requirements.txt
 pip install "git+https://github.com/facebookresearch/pytorch3d.git@stable"
 ```
