@@ -40,13 +40,18 @@ cd third_party/gym-0.21.0 && pip install -e . && cd ../..
 pip install --no-deps "robosuite_task_zoo @ https://github.com/AlanxChen/robosuite-task-zoo/archive/522d4a012185278e51a65068ad19a0fb0bc9cf8d.tar.gz"
 ```
 
-Finally, configure MuJoCo rendering for headless GPU evaluation, then reload
-your shell configuration.
+Finally, configure MuJoCo rendering for headless GPU evaluation. Add the
+following lines to your shell configuration file, such as `~/.bashrc`:
 
 ```bash
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib/nvidia
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda/lib64
 export MUJOCO_GL=egl
+```
+
+Reload the shell configuration:
+
+```bash
 source ~/.bashrc
 ```
 
