@@ -430,6 +430,8 @@ class DiffusionUnetMoEImagePolicy(BasePolicy):
         if self.use_aux_loss : 
             bc_loss = loss.detach().clone()
     
+            # Effective aux terms are aux_loss_weight * lambda_balance and
+            # aux_loss_weight * lambda_entropy.
             loss = loss+ self.aux_loss_weight * aux_loss
             loss_dict = {
                 'bc_loss': bc_loss.item(),

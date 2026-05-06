@@ -120,7 +120,7 @@ def moe_auxiliary_loss(gate_scores, top_k_indices, lambda_balance=1.0, lambda_en
     # Entropy Loss
     entropy = -(gate_scores * torch.log(gate_scores + 1e-9)).sum(dim=1).mean()
 
-    # Combine the losses
+    # The policy multiplies this combined auxiliary loss by aux_loss_weight.
     auxiliary_loss = lambda_balance * switch_loss + lambda_entropy * entropy
     aux_loss_dict = {
         'switch_loss': switch_loss,

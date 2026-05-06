@@ -94,13 +94,13 @@ If you would like to train MoE-DP on a single MimicGen task, please use
 `scripts/train_policy.sh`.
 
 ```bash
-bash scripts/train_policy.sh dp_unet_mlp_moe Kitchen_Cleanup_T0 0000 0 0 100
+bash scripts/train_policy.sh dp_unet_mlp_moe Kitchen_Cleanup_T0 0000 0 0
 ```
 
-The argument order is:
+The script uses `n_demo=100` by default. The argument order is:
 
 ```bash
-bash scripts/train_policy.sh <algorithm> <task_name> <run_tag> <seed> <gpu_id> <n_demo>
+bash scripts/train_policy.sh <algorithm> <task_name> <run_tag> <seed> <gpu_id>
 ```
 
 To train with the baseline diffusion policy, replace `dp_unet_mlp_moe` with
@@ -120,7 +120,6 @@ use `scripts/train_taskmd_multi_gpu.sh`.
 bash scripts/train_taskmd_multi_gpu.sh \
   --gpus 0,1,2,3 \
   --seeds 0 \
-  --n-demo 100 \
   --run-tag moe_multi
 ```
 

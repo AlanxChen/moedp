@@ -8,6 +8,8 @@ name: Kitchen_Cleanup_T0
 moe:
   num_experts: 16
   top_k: 2
+  # Effective aux weights are aux_loss_weight * lambda_balance and
+  # aux_loss_weight * lambda_entropy.
   aux_loss_weight: 0.1
   lambda_balance: 1.0
   lambda_entropy: 0.1

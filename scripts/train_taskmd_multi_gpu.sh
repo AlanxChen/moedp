@@ -7,7 +7,6 @@ REPO_ROOT=$(cd "${SCRIPT_DIR}/.." && pwd)
 
 GPU_CSV="0"
 SEED_CSV="0"
-N_DEMO="100"
 RUN_TAG=$(date -u +"%m%d%H%M")
 ADDITION_START="0000"
 TASK_REGEX=""
@@ -36,7 +35,6 @@ Usage:
 Options:
   --gpus 0,1,2,3        Comma-separated GPU ids. Default: 0
   --seeds 0,1           Comma-separated seeds. Default: 0
-  --n-demo 100          Number of demonstrations passed to train_policy.sh. Default: 100
   --run-tag 0412exp     Prefix used for log directory names. Default: UTC MMDDHHMM
   --addition-start 0100 First numeric addition_info value. Default: 0000
   --task-regex REGEX    Only schedule tasks whose names match the regex.
@@ -71,10 +69,6 @@ while [[ $# -gt 0 ]]; do
             ;;
         --seeds)
             SEED_CSV="$2"
-            shift 2
-            ;;
-        --n-demo)
-            N_DEMO="$2"
             shift 2
             ;;
         --run-tag)
@@ -188,7 +182,7 @@ if [[ "${DRY_RUN}" == "true" ]]; then
     for job_idx in "${!PLAN_LINES[@]}"; do
         IFS='|' read -r alg_name task_name addition_info seed <<< "${PLAN_LINES[$job_idx]}"
         gpu_slot=${GPUS[$((job_idx % ${#GPUS[@]}))]}
-        echo "[DRY-RUN][gpu ${gpu_slot}] setsid timeout --signal=TERM --kill-after=${JOB_TIMEOUT_KILL_AFTER_SEC}s ${JOB_TIMEOUT_SEC}s bash scripts/train_policy.sh ${alg_name} ${task_name} ${addition_info} ${seed} ${gpu_slot} ${N_DEMO}"
+        echo "[DRY-RUN][gpu ${gpu_slot}] setsid timeout --signal=TERM --kill-after=${JOB_TIMEOUT_KILL_AFTER_SEC}s ${JOB_TIMEOUT_SEC}s bash scripts/train_policy.sh ${alg_name} ${task_name} ${addition_info} ${seed} ${gpu_slot}"
     done
     exit 0
 fi
@@ -301,8 +295,7 @@ for gpu_index in "${!GPUS[@]}"; do
                 "${task_name}" \
                 "${addition_info}" \
                 "${seed}" \
-                "${gpu_id}" \
-                "${N_DEMO}" > "${log_file}" 2>&1 &
+                "${gpu_id}" > "${log_file}" 2>&1 &
             active_job_pgid=$!
             echo "${active_job_pgid}" > "${active_job_pgid_file}"
             wait "${active_job_pgid}"

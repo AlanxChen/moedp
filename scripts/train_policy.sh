@@ -5,8 +5,8 @@ SCRIPT_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 source "${SCRIPT_DIR}/_runtime_env.sh"
 
 # Usage:
-# bash scripts/train_policy.sh dp_unet_mlp_moe Kitchen_T0 9002 0 0 100
-# args: alg_name task_name addition_info seed gpu_id n_demo
+# bash scripts/train_policy.sh dp_unet_mlp_moe Kitchen_T0 9002 0 0
+# args: alg_name task_name addition_info seed gpu_id
 
 DEBUG=False
 save_ckpt=True
@@ -31,12 +31,7 @@ config_name=${alg_name}
 addition_info=${3}
 seed=${4}
 gpu_id=${5}
-n_demo=${6}
-
-if [ -z "$n_demo" ]; then
-    echo "Error: n_demo is not provided. Please specify the number of demonstrations as the 6th argument."
-    exit 1
-fi
+n_demo=100
 
 exp_name=${task_name}-${alg_name}-${addition_info}
 run_dir="data/outputs/${exp_name}_seed${seed}"
